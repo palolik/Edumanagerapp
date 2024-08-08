@@ -7,7 +7,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity2">
+    tools:context=".presentation.courses.CourseActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/CourseListRecyclerview"
@@ -16,54 +16,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_margin="10dp"/>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_nav">
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-<!--<RelativeLayout xmlns:tools="http://schemas.android.com/tools"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent"-->
-<!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    tools:context=".MainActivity">-->
-<!--    <androidx.viewpager.widget.ViewPager-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="30dp"-->
-
-
-<!--        />-->
-<!--    <LinearLayout android:layout_width="match_parent"-->
-<!--        android:layout_height="30dp"-->
-<!--        android:orientation="horizontal"-->
-<!--        android:id="@+id/dotsLayout"-->
-<!--        android:layout_alignParentBottom="true"-->
-
-<!--        />-->
-<!--        <View-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="1dp"-->
-<!--            android:alpha=".5"-->
-<!--            android:background="@color/white"-->
-<!--            android:layout_above="@+id/dotsLayout" />-->
-<!--    <Button-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:text="Next"-->
-<!--        android:background="@color/white"-->
-<!--        android:id="@+id/btn_next"-->
-<!--        android:backgroundTint="@color/white"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        android:layout_alignParentRight="true"-->
-<!--        android:layout_margin="4dp" />-->
-
-<!--    <Button-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:text="Previous"-->
-<!--        android:background="@color/white"-->
-<!--        android:id="@+id/btn_prev"-->
-<!--        android:backgroundTint="@color/white"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        android:layout_alignParentLeft="true"-->
-<!--        android:layout_margin="4dp"-->
-
-<!--        />-->
-
-<!--</RelativeLayout>-->

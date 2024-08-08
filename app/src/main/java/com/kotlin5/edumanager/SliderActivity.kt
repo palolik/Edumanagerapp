@@ -15,10 +15,10 @@ import android.widget.TextView
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
-import com.kotlin5.edumanager.R
+import com.kotlin5.edumanager.presentation.courses.CourseActivity
 import com.kotlin5.edumanager.presentation.sliders.MyAdapter
 
-class MainActivity : AppCompatActivity() {
+class SliderActivity : AppCompatActivity() {
     private lateinit var viewPager: ViewPager
     private lateinit var dotsLayout: LinearLayout
     private lateinit var btnNext: TextView  // Use TextView for Button
@@ -54,14 +54,14 @@ class MainActivity : AppCompatActivity() {
                 viewPager.currentItem = currentPage + 1
             } else {
                 setAppStartStatus(true)
-                startActivity(Intent(this, MainActivity2::class.java))  // Ensure AnotherActivity is valid
+                startActivity(Intent(this, CourseActivity::class.java))  // Ensure AnotherActivity is valid
                 finish()
             }
         }
 
         btnSkip.setOnClickListener {
             setAppStartStatus(true)
-            startActivity(Intent(this, MainActivity2::class.java))  // Ensure AnotherActivity is valid
+            startActivity(Intent(this, CourseActivity::class.java))  // Ensure AnotherActivity is valid
             finish()
         }
 
