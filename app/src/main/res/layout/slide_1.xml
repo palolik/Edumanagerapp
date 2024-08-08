@@ -13,9 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="39dp"
         android:gravity="center"
-        android:text="screen 1 "
+        android:text="asdsadsd "
         android:textSize="36sp"
-        android:textColor="@color/black"
         />
     <View
         android:layout_width="match_parent"
@@ -24,9 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="39dp"
         android:gravity="center"
-        android:text="screen 1 s"
-        android:textColor="@color/black"
-
+        android:text="asdsadsd"
         android:textSize="20sp"
         />
 
