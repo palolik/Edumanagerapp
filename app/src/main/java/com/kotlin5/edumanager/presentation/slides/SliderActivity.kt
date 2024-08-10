@@ -1,4 +1,4 @@
-package com.kotlin5.edumanager
+package com.kotlin5.edumanager.presentation.slides
 
 import android.content.Context
 import android.content.Intent
@@ -15,6 +15,7 @@ import android.widget.TextView
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
+import com.kotlin5.edumanager.R
 import com.kotlin5.edumanager.presentation.courses.CourseActivity
 import com.kotlin5.edumanager.presentation.sliders.MyAdapter
 
@@ -54,14 +55,14 @@ class SliderActivity : AppCompatActivity() {
                 viewPager.currentItem = currentPage + 1
             } else {
                 setAppStartStatus(true)
-                startActivity(Intent(this, CourseActivity::class.java))  // Ensure AnotherActivity is valid
+                startActivity(Intent(this, CourseActivity::class.java))
                 finish()
             }
         }
 
         btnSkip.setOnClickListener {
             setAppStartStatus(true)
-            startActivity(Intent(this, CourseActivity::class.java))  // Ensure AnotherActivity is valid
+            startActivity(Intent(this, CourseActivity::class.java))
             finish()
         }
 

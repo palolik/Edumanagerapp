@@ -1,4 +1,4 @@
-package com.example.bottomnavyt
+package com.kotlin5.edumanager
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

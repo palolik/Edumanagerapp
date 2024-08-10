@@ -19,6 +19,8 @@ coilcompose = "2.6.0"
 kserial = "1.6.0"
 coil = "2.7.0"
 hilt-android = "2.51.1"
+databindingRuntime = "8.5.2"
+library = "3.2.0-alpha11"
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -40,6 +42,8 @@ convertergson =  {group = "com.squareup.retrofit2" , name = "converter-gson" ,ve
 coil =  {group = "io.coil-kt" , name = "coil" ,version.ref = "coil"}
 coilsvg =  {group = "io.coil-kt" , name = "coil-svg" ,version.ref = "coil"}
 hilt = {group= "com.google.dagger" , name="hilt-android" , version.ref = "hilt-android"}
+#aruntime = { group = "androidx.databinding", name = "databinding-runtime", version.ref = "databindingRuntime" }
+#databinding = { group = "androidx.databinding", name = "library", version.ref = "library" }
 
 
 [plugins]

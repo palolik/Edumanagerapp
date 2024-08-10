@@ -1,6 +1,8 @@
 package com.kotlin5.edumanager.presentation.courses
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -37,5 +39,10 @@ binding = ActivityMainBinding.inflate(layoutInflater)
             }
         })
         viewModel.makeAPICall()
+    }
+    fun onFabClick(view: View){
+//        Toast.makeText(this,"floating button clicked",Toast.LENGTH_LONG).show()
+        val intent = Intent(this, AddCourseActivity::class.java)
+        startActivity(intent)
     }
 }
