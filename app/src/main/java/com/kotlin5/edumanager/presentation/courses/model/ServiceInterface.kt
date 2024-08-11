@@ -14,6 +14,6 @@ interface ServiceInterface {
 }
 
 interface ApiService {
-    @POST("courses") // Replace with your actual API endpoint
+    @POST("addclasses") // Replace with your actual API endpoint
     fun addCourse(@Body course: Course): Call<Void>
 }

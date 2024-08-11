@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <item android:id="@+id/first"
+        android:title="1st"/>
+
+    <item android:id="@+id/second"
+        android:title="2nd"/>
+
+    <item android:id="@+id/third"
+        android:title="3rd"/>
+
+    <item android:title="Profile"
+        >
+        <menu>
+            <item
+                android:id="@+id/nav_pdetails"
+                android:title="Profile Details"
+                android:icon="@drawable/ic_profile"/>
+            <item
+                android:id="@+id/nav_tutor"
+                android:title="Tutor Request"
+                android:icon="@drawable/ic_profile"/>
+
+
+        </menu>
+    </item>
+    <item android:title="Communication"
+        >
+        <menu>
+            <item
+                android:id="@+id/nav_logout"
+                android:title="Rate Us"
+                android:icon="@drawable/ic_profile"/>
+            <item
+                android:id="@+id/Share"
+                android:title="Share"
+                android:icon="@drawable/ic_profile"/>
+
+        </menu>
+    </item>
+
+</menu>

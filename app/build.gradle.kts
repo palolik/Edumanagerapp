@@ -62,4 +62,5 @@ dependencies {
     implementation(libs.coil)
     implementation(libs.coilsvg)
     implementation(libs.hilt)
+    implementation(libs.circleimageview)
 }

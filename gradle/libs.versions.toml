@@ -21,6 +21,7 @@ coil = "2.7.0"
 hilt-android = "2.51.1"
 databindingRuntime = "8.5.2"
 library = "3.2.0-alpha11"
+circleimageview = "3.1.0"
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -44,6 +45,7 @@ coilsvg =  {group = "io.coil-kt" , name = "coil-svg" ,version.ref = "coil"}
 hilt = {group= "com.google.dagger" , name="hilt-android" , version.ref = "hilt-android"}
 #aruntime = { group = "androidx.databinding", name = "databinding-runtime", version.ref = "databindingRuntime" }
 #databinding = { group = "androidx.databinding", name = "library", version.ref = "library" }
+circleimageview = {group = "de.hdodenhof", name = "circleimageview" , version.ref = "circleimageview"}
 
 
 [plugins]
