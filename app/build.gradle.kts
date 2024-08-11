@@ -63,4 +63,7 @@ dependencies {
     implementation(libs.coilsvg)
     implementation(libs.hilt)
     implementation(libs.circleimageview)
+    implementation(libs.swiperefreshlayout)
+
+
 }

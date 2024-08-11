@@ -11,6 +11,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.kotlin5.edumanager.R
 import com.kotlin5.edumanager.databinding.ActivityMainBinding
 import com.kotlin5.edumanager.presentation.courses.adapter.CourseList
@@ -66,7 +67,7 @@ class CourseActivity : AppCompatActivity() {
     }
 
     private fun initRecyclerView() {
-        binding.CourseListRecyclerview.layoutManager = LinearLayoutManager(this)
+        binding.CourseListRecyclerview.layoutManager = LinearLayoutManager(this,RecyclerView.HORIZONTAL,false)
         recyclerAdapter = CourseList(this)
         binding.CourseListRecyclerview.adapter = recyclerAdapter
     }
