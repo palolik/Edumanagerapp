@@ -22,6 +22,10 @@
                 android:id="@+id/nav_tutor"
                 android:title="Tutor Request"
                 android:icon="@drawable/ic_profile"/>
+            <item
+                android:id="@+id/logout"
+                android:title="Logout"
+                android:icon="@drawable/ic_profile"/>
 
 
         </menu>
@@ -30,11 +34,11 @@
         >
         <menu>
             <item
-                android:id="@+id/nav_logout"
+                android:id="@+id/rate_us"
                 android:title="Rate Us"
                 android:icon="@drawable/ic_profile"/>
             <item
-                android:id="@+id/Share"
+                android:id="@+id/share"
                 android:title="Share"
                 android:icon="@drawable/ic_profile"/>
 
