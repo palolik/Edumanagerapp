@@ -1,23 +1,22 @@
-package com.kotlin5.edumanager.presentation.courses
+package com.kotlin5.edumanager.presentation.courses.adapter
 
 import android.os.Bundle
-import android.util.Log
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.google.android.material.textfield.TextInputEditText
 import com.kotlin5.edumanager.R
 import com.kotlin5.edumanager.data.Course
-import com.kotlin5.edumanager.presentation.courses.model.ApiService
-import com.kotlin5.edumanager.presentation.courses.model.Instance
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.kotlin5.edumanager.databinding.ActivityAddCourseBinding
+import com.kotlin5.edumanager.presentation.courses.DrawerManager
+import com.kotlin5.edumanager.presentation.courses.viewmodel.CourseViewModel
 
 class AddCourseActivity : AppCompatActivity() {
-
-    private lateinit var toolbar: Toolbar
+    private lateinit var drawerManager: DrawerManager
+    private lateinit var binding: ActivityAddCourseBinding
     private lateinit var titleField: TextInputEditText
     private lateinit var courseDesField: TextInputEditText
     private lateinit var imagelinkField: TextInputEditText
@@ -27,12 +26,14 @@ class AddCourseActivity : AppCompatActivity() {
     private lateinit var totalenrollmentField: TextInputEditText
     private lateinit var statusField: TextInputEditText
 
+    private val courseViewModel: CourseViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_course)
+        binding = ActivityAddCourseBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         // Initialize UI elements
-        toolbar = findViewById(R.id.toolbar)
         titleField = findViewById(R.id.titleField)
         courseDesField = findViewById(R.id.CourseDesField)
         imagelinkField = findViewById(R.id.imagelinkField)
@@ -42,10 +43,8 @@ class AddCourseActivity : AppCompatActivity() {
         totalenrollmentField = findViewById(R.id.totalenrollmentField)
         statusField = findViewById(R.id.statusField)
 
-        // Set up the toolbar
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setHomeButtonEnabled(true)
+        // Initialize DrawerManager
+        initDrawerManager()
 
         val saveButton: Button = findViewById(R.id.addcourse)
         saveButton.setOnClickListener { saveCourse() }
@@ -66,25 +65,29 @@ class AddCourseActivity : AppCompatActivity() {
         if (title.isBlank() || description.isBlank()) {
             Toast.makeText(this, "Title and Description are required", Toast.LENGTH_SHORT).show()
         } else {
-            // Create Course object and make network request
             val course = Course(title, description, image, price, userEmail, userName, totalenrolment, status)
-            val retrofit = Instance.getInstance()
-            val apiService = retrofit.create(ApiService::class.java)
-            apiService.addCourse(course).enqueue(object : Callback<Void> {
-                override fun onResponse(call: Call<Void>, response: Response<Void>) {
-                    if (response.isSuccessful) {
-                        Toast.makeText(this@AddCourseActivity, "Course saved successfully", Toast.LENGTH_SHORT).show()
-                    } else {
-                        Toast.makeText(this@AddCourseActivity, "Failed to save course: ${response.errorBody()?.string()}", Toast.LENGTH_SHORT).show()
-                        Log.e("AddCourseActivity", "Failed to save course: ${response.errorBody()?.string()}")
-                    }
+            courseViewModel.addCourse(course) { success, errorMessage ->
+                if (success) {
+                    Toast.makeText(this, "Course saved successfully", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this, "Failed to save course: $errorMessage", Toast.LENGTH_SHORT).show()
                 }
-
-                override fun onFailure(call: Call<Void>, t: Throwable) {
-                    Toast.makeText(this@AddCourseActivity, "Network error: ${t.message}", Toast.LENGTH_SHORT).show()
-                }
-            })
+            }
         }
     }
-}
 
+    private fun initDrawerManager() {
+        // Initialize the DrawerManager with the correct parameters
+        drawerManager = DrawerManager(
+            this,
+            binding.drawerLayout,
+            binding.toolbarhome,
+            binding.navView // Ensure this is a NavigationView in your XML layout
+        )
+        drawerManager.setupNavigationDrawer()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return drawerManager.onOptionsItemSelected(item) || super.onOptionsItemSelected(item)
+    }
+}

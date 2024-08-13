@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:background="@color/white"
+    >
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
@@ -13,7 +14,6 @@
         android:layout_above="@+id/dotsLayout"
         android:layout_alignParentTop="true" />
 
-    <!-- LinearLayout for page indicator dots -->
     <LinearLayout
         android:id="@+id/dotsLayout"
         android:layout_width="match_parent"
@@ -21,43 +21,36 @@
         android:orientation="horizontal"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="16dp" />
+        />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_above="@+id/dotsLayout"
-        android:alpha="0.5"
-        android:background="@color/black" />
-
-    <!-- Next Button -->
     <Button
         android:id="@+id/btn_next"
-        android:layout_width="80dp"
+        android:text="Next"
+        android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="2dp"
-        android:background="@color/white"
-        android:backgroundTint="@color/white"
-        android:text="Next"
-        android:textColorLink="#010F8C" />
+        android:background="#00FFFFFF"
+        android:textColor="@color/blue"
+        android:textSize="16dp"
+        android:padding="8dp"
+        android:textAllCaps="true"
+        android:gravity="center" />
 
     <!-- Previous Button -->
     <Button
+        android:text="Skip"
         android:id="@+id/btn_prev"
-        android:layout_width="80dp"
+        android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="2dp"
-        android:background="@drawable/button_background"
-    android:text="Prev"
-    android:textColor="@color/black"
-    android:textSize="16sp"
-    android:padding="8dp"
-    android:textAllCaps="false"
-    android:gravity="center"
-     />
+        android:background="#00FFFFFF"
+        android:textColor="@color/blue"
+        android:textSize="16dp"
+        android:textAllCaps="true"
+        android:gravity="center" />
 
 </RelativeLayout>

@@ -26,7 +26,7 @@
             android:theme="@style/Theme.Edumanager" />
 
         <activity
-            android:name=".presentation.courses.AddCourseActivity"
+            android:name=".presentation.courses.adapter.AddCourseActivity"
             android:exported="true" />
 
         <activity

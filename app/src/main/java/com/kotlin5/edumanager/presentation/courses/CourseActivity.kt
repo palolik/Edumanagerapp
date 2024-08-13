@@ -5,24 +5,22 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.google.firebase.auth.FirebaseAuth
 import com.kotlin5.edumanager.R
 import com.kotlin5.edumanager.databinding.ActivityCourseBinding
-import com.kotlin5.edumanager.presentation.auth.SignInActivity
+import com.kotlin5.edumanager.presentation.courses.adapter.AddCourseActivity
 import com.kotlin5.edumanager.presentation.courses.adapter.CourseList
 import com.kotlin5.edumanager.presentation.courses.viewmodel.MainActivityViewModel
 
 class CourseActivity : AppCompatActivity() {
     private lateinit var recyclerAdapter: CourseList
     private lateinit var binding: ActivityCourseBinding
-    private lateinit var toggle: ActionBarDrawerToggle
+    private lateinit var drawerManager: DrawerManager
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private lateinit var viewModel: MainActivityViewModel
 
@@ -34,44 +32,12 @@ class CourseActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbarhome)
         initRecyclerView()
         initViewModel()
+        initDrawerManager()
 
         swipeRefreshLayout = binding.swipeRefreshLayout
         swipeRefreshLayout.setOnRefreshListener {
             viewModel.makeAPICall()
         }
-
-        // Initialize Navigation Drawer
-        toggle = ActionBarDrawerToggle(
-            this,
-            binding.drawerLayout,
-            binding.toolbarhome,  // Pass the toolbar here
-            R.string.open,
-            R.string.close
-        )
-        binding.drawerLayout.addDrawerListener(toggle)
-        toggle.syncState()
-
-        binding.navView.setNavigationItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.first -> {
-                    Toast.makeText(this, "First Item Clicked", Toast.LENGTH_SHORT).show()
-                }
-                R.id.second -> {
-                    Toast.makeText(this, "Second Item Clicked", Toast.LENGTH_SHORT).show()
-                }
-                R.id.third -> {
-                    Toast.makeText(this, "Third Item Clicked", Toast.LENGTH_SHORT).show()
-                }
-                R.id.logout -> {
-                    logout()
-                }
-            }
-            binding.drawerLayout.closeDrawers()
-            true
-        }
-
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setHomeButtonEnabled(true)
     }
 
     private fun initRecyclerView() {
@@ -93,23 +59,19 @@ class CourseActivity : AppCompatActivity() {
         })
         viewModel.makeAPICall()
     }
-private fun logout(){
-    FirebaseAuth.getInstance().signOut()
-    val intent = Intent(this,SignInActivity::class.java)
-    startActivity(intent)
-    finish()
-}
+
+    private fun initDrawerManager() {
+        drawerManager = DrawerManager(this, binding.drawerLayout, binding.toolbarhome, binding.navView)
+        drawerManager.setupNavigationDrawer()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return drawerManager.onOptionsItemSelected(item) || super.onOptionsItemSelected(item)
+    }
     fun onFabClick(view: View) {
         val intent = Intent(this, AddCourseActivity::class.java)
         startActivity(intent)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here.
-        return if (toggle.onOptionsItemSelected(item)) {
-            true
-        } else {
-            super.onOptionsItemSelected(item)
-        }
-    }
+
 }

@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:scrollbars="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/rounded_corners"
-        android:layout_margin="5dp"
-        android:padding="16dp"
-       >
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/rounded_corners"
+    android:layout_margin="5dp"
+    android:padding="16dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
         <ImageView
             android:id="@+id/flagImage"
@@ -37,7 +32,7 @@
                 android:textSize="24sp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                android:text="Country Name" />  <!-- Example text -->
+                android:text="Course Name" />  <!-- Example text -->
 
             <TextView
                 android:id="@+id/tvCapital"
@@ -47,7 +42,7 @@
                 android:textSize="18sp"
                 android:textColor="@color/black"
                 android:maxLines="2"
-                android:text="Capital City" />  <!-- Example text -->
+                android:text="description" />  <!-- Example text -->
 
             <TextView
                 android:id="@+id/tvRegion"
@@ -56,7 +51,7 @@
                 android:layout_marginBottom="8dp"
                 android:textSize="18sp"
                 android:textColor="@color/black"
-                android:text="Region" />  <!-- Example text -->
+                android:text="status" />
 
             <TextView
                 android:id="@+id/tvRegion2"
@@ -64,9 +59,16 @@
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
                 android:textColor="@color/black"
-                android:text="Additional Info" />  <!-- Example text -->
-
+                android:text="price" />  <!-- Example text -->
+            <TextView
+                android:id="@+id/viewdetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00FFFFFF"
+                android:text="view details"
+                android:textSize="18sp"
+                android:textColor="@color/blue"
+                 />
         </LinearLayout>
 
     </LinearLayout>
-</ScrollView>
