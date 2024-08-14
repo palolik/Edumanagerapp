@@ -9,6 +9,7 @@ import coil.decode.SvgDecoder
 import coil.load
 import com.kotlin5.edumanager.data.CourseModel
 import com.kotlin5.edumanager.databinding.CourseListRowBinding
+import com.kotlin5.edumanager.presentation.courses.adapter.CourseDetailsActivity
 
 class CourseList(private val activity: Activity) : RecyclerView.Adapter<CourseList.MyViewHolder>() {
 
@@ -44,10 +45,8 @@ class CourseList(private val activity: Activity) : RecyclerView.Adapter<CourseLi
             }
 
             binding.viewdetails.setOnClickListener {
-                // Create an Intent to start AddCourseActivity
-                val intent = Intent(activity, AddCourseActivity::class.java).apply {
-                    // Optionally, pass data to the new activity
-                    putExtra("COURSE_ID", data.price) // Replace with your actual data field
+                val intent = Intent(activity, CourseDetailsActivity::class.java).apply {
+                    putExtra("id", data._id) // Replace with your actual data field
                 }
                 // Start the new activity
                 activity.startActivity(intent)

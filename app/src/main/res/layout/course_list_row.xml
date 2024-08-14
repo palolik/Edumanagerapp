@@ -59,7 +59,8 @@
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
                 android:textColor="@color/black"
-                android:text="price" />  <!-- Example text -->
+                android:text="price" />
+            <!-- Example text -->
             <TextView
                 android:id="@+id/viewdetails"
                 android:layout_width="wrap_content"

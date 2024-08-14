@@ -61,7 +61,6 @@ class AddCourseActivity : AppCompatActivity() {
         val totalenrolment = totalenrollmentField.text.toString()
         val status = statusField.text.toString()
 
-        // Validate input
         if (title.isBlank() || description.isBlank()) {
             Toast.makeText(this, "Title and Description are required", Toast.LENGTH_SHORT).show()
         } else {
@@ -77,12 +76,12 @@ class AddCourseActivity : AppCompatActivity() {
     }
 
     private fun initDrawerManager() {
-        // Initialize the DrawerManager with the correct parameters
+
         drawerManager = DrawerManager(
             this,
             binding.drawerLayout,
             binding.toolbarhome,
-            binding.navView // Ensure this is a NavigationView in your XML layout
+            binding.navView
         )
         drawerManager.setupNavigationDrawer()
     }
