@@ -13,9 +13,11 @@
         android:theme="@style/Theme.Edumanager"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.courses.adapter.EditCourseActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.courses.adapter.CourseDetailsActivity"
             android:exported="true" />
-
         <activity
             android:name=".presentation.auth.SignInActivity"
             android:exported="true"
@@ -27,7 +29,6 @@
         <activity
             android:name=".presentation.courses.adapter.AddCourseActivity"
             android:exported="true" />
-
         <activity
             android:name=".presentation.slides.SliderActivity"
             android:exported="true">

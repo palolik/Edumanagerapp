@@ -26,7 +26,6 @@ data class Course(
 )
 
 data class CourseDetailsResponse(
-    val _id : String,
     val title: String,
     val description: String,
     val image: String,

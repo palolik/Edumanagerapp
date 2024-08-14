@@ -1,64 +1,60 @@
 package com.kotlin5.edumanager.presentation.courses.adapter
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.kotlin5.edumanager.R
 import com.kotlin5.edumanager.data.CourseDetailsResponse
 import com.kotlin5.edumanager.presentation.courses.model.Instance
+import com.kotlin5.edumanager.databinding.ActivityCourseDetailsBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.io.InputStream
 import java.net.HttpURLConnection
 import java.net.URL
 
 class CourseDetailsActivity : AppCompatActivity() {
 
-    private lateinit var textViewName: TextView
-    private lateinit var textViewDescription: TextView
-    private lateinit var textViewStatus: TextView
-    private lateinit var textViewPrice: TextView
-    private lateinit var textViewRegion: TextView
-    private lateinit var textViewInstructor: TextView
-    private lateinit var textViewContact: TextView
-    private lateinit var imageViewFlag: ImageView
-    private lateinit var enrollNow: TextView
+    private lateinit var binding: ActivityCourseDetailsBinding
+    private var courseId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_course_details)
-
-        // Initialize TextViews and ImageView
-        textViewName = findViewById(R.id.tvCoursename)
-        textViewDescription = findViewById(R.id.tvdescription)
-        textViewStatus = findViewById(R.id.tvstatus)
-        textViewPrice = findViewById(R.id.tvprice)
-        textViewRegion = findViewById(R.id.tvRegion2)
-        textViewInstructor = findViewById(R.id.tvinstructor)
-        textViewContact = findViewById(R.id.contact)
-        imageViewFlag = findViewById(R.id.flagImage)
-        enrollNow = findViewById(R.id.enrollnow)
+        binding = ActivityCourseDetailsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         // Retrieve the Intent that started this Activity
-        val intent = intent
-        val id = intent.getStringExtra("id")
-
-        if (id != null) {
-            fetchCourseDetails(id)
+        courseId = intent.getStringExtra("id")
+        @SuppressLint("SetTextI18n")
+        if (courseId != null) {
+            fetchCourseDetails(courseId!!)
         } else {
             // Handle the case where no ID is found
-            textViewName.text = "No Course ID provided"
-            textViewDescription.text = ""
-            textViewStatus.text = ""
-            textViewPrice.text = ""
-            textViewRegion.text = ""
-            textViewInstructor.text = ""
-            textViewContact.text = ""
-            imageViewFlag.setImageResource(R.drawable.s1) // Set a placeholder image
+            binding.tvCoursename.text = "No Course ID provided"
+            binding.tvdescription.text = ""
+            binding.tvstatus.text = ""
+            binding.tvprice.text = ""
+            binding.tvRegion2.text = ""
+            binding.tvinstructor.text = ""
+            binding.contact.text = ""
+            binding.flagImage.setImageResource(R.drawable.s1)
+        }
+
+        binding.deletecourse.setOnClickListener {
+            courseId?.let {
+                deleteCourse(it)
+            }
+        }
+        binding.editcourse.setOnClickListener {
+            val intent = Intent(this, EditCourseActivity::class.java).apply {
+                putExtra("id", courseId)
+            }
+            // Start the new activity
+            startActivity(intent)
         }
     }
 
@@ -72,29 +68,49 @@ class CourseDetailsActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val courseDetails = response.body()
                     if (courseDetails != null) {
-                        textViewName.text = courseDetails.title
-                        textViewDescription.text = courseDetails.description
-                        textViewStatus.text = courseDetails.status
-                        textViewPrice.text = courseDetails.price
-                        textViewRegion.text = courseDetails.totalenrolment
-                        textViewInstructor.text = courseDetails.userName
-                        textViewContact.text = courseDetails.userEmail
-                        // Load image
+                        binding.tvCoursename.text = courseDetails.title
+                        binding.tvdescription.text = courseDetails.description
+                        binding.tvstatus.text = courseDetails.status
+                        binding.tvprice.text = courseDetails.price
+                        binding.tvRegion2.text = courseDetails.totalenrolment.toString()
+                        binding.tvinstructor.text = courseDetails.userName
+                        binding.contact.text = courseDetails.userEmail
                         loadImageFromUrl(courseDetails.image)
                     }
                 }
             }
 
+            @SuppressLint("SetTextI18n")
             override fun onFailure(call: Call<CourseDetailsResponse>, t: Throwable) {
                 // Handle failure
-                textViewName.text = "Request failed: ${t.message}"
-                textViewDescription.text = ""
-                textViewStatus.text = ""
-                textViewPrice.text = ""
-                textViewRegion.text = ""
-                textViewInstructor.text = ""
-                textViewContact.text = ""
-                imageViewFlag.setImageResource(R.drawable.s1)
+                binding.tvCoursename.text = "Request failed: ${t.message}"
+                binding.tvdescription.text = ""
+                binding.tvstatus.text = ""
+                binding.tvprice.text = ""
+                binding.tvRegion2.text = ""
+                binding.tvinstructor.text = ""
+                binding.contact.text = ""
+                binding.flagImage.setImageResource(R.drawable.s1)
+            }
+        })
+    }
+
+    private fun deleteCourse(id: String) {
+        // Call the API to delete the course
+        Instance.apiService.deleteCourse(id).enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                if (response.isSuccessful) {
+                    Toast.makeText(this@CourseDetailsActivity, "Course deleted successfully", Toast.LENGTH_SHORT).show()
+                    // Finish the activity and return to the previous screen
+                    finish()
+                } else {
+                    Toast.makeText(this@CourseDetailsActivity, "Failed to delete course: ${response.code()}", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                // Handle failure
+                Toast.makeText(this@CourseDetailsActivity, "Request failed: ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -108,13 +124,13 @@ class CourseDetailsActivity : AppCompatActivity() {
                 connection.inputStream.use { inputStream ->
                     val bitmap = BitmapFactory.decodeStream(inputStream)
                     runOnUiThread {
-                        imageViewFlag.setImageBitmap(bitmap)
+                        binding.flagImage.setImageBitmap(bitmap)
                     }
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
                 runOnUiThread {
-                    imageViewFlag.setImageResource(R.drawable.s1) // Set a placeholder image if error occurs
+                    binding.flagImage.setImageResource(R.drawable.s1) // Set a placeholder image if error occurs
                 }
             }
         }.start()
