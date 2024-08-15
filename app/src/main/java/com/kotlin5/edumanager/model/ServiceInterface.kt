@@ -1,8 +1,10 @@
-package com.kotlin5.edumanager.presentation.courses.model
+package com.kotlin5.edumanager.model
 
 import com.kotlin5.edumanager.data.Course
 import com.kotlin5.edumanager.data.CourseDetailsResponse
 import com.kotlin5.edumanager.data.CourseModel
+import com.kotlin5.edumanager.data.Feedback
+import com.kotlin5.edumanager.data.Partner
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -30,5 +32,13 @@ interface ApiService {
     @PUT("classes/{id}")
     fun updateCourse(@Path("id") id: String, @Body course: CourseDetailsResponse): Call<Void>
 
+    @GET("feedback")
+    fun getFeedbackList(): Call<List<Feedback>>
+    @GET("partners")
+    fun getPartnerList(): Call<List<Partner>>
+
+
 }
+
+
 

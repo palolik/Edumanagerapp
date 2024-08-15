@@ -5,13 +5,15 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.kotlin5.edumanager.R
 import com.kotlin5.edumanager.data.CourseDetailsResponse
-import com.kotlin5.edumanager.presentation.courses.model.Instance
+import com.kotlin5.edumanager.model.Instance
 import com.kotlin5.edumanager.databinding.ActivityEditCourseBinding
+import com.kotlin5.edumanager.presentation.courses.DrawerManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class EditCourseActivity : AppCompatActivity() {
+    private lateinit var drawerManager: DrawerManager
 
     private lateinit var binding: ActivityEditCourseBinding
     private var courseId: String? = null
@@ -35,6 +37,8 @@ class EditCourseActivity : AppCompatActivity() {
                 updateCourse(it)
             }
         }
+        initDrawerManager()
+
     }
 
     private fun fetchCourseDetails(id: String) {
@@ -92,5 +96,15 @@ class EditCourseActivity : AppCompatActivity() {
                 Toast.makeText(this@EditCourseActivity, "Request failed: ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
+    }
+    private fun initDrawerManager() {
+
+        drawerManager = DrawerManager(
+            this,
+            binding.drawerLayout,
+            binding.toolbarhome,
+            binding.navView
+        )
+        drawerManager.setupNavigationDrawer()
     }
 }

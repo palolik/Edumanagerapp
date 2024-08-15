@@ -9,8 +9,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.kotlin5.edumanager.R
 import com.kotlin5.edumanager.data.CourseDetailsResponse
-import com.kotlin5.edumanager.presentation.courses.model.Instance
+import com.kotlin5.edumanager.model.Instance
 import com.kotlin5.edumanager.databinding.ActivityCourseDetailsBinding
+import com.kotlin5.edumanager.presentation.courses.DrawerManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -18,6 +19,7 @@ import java.net.HttpURLConnection
 import java.net.URL
 
 class CourseDetailsActivity : AppCompatActivity() {
+    private lateinit var drawerManager: DrawerManager
 
     private lateinit var binding: ActivityCourseDetailsBinding
     private var courseId: String? = null
@@ -27,13 +29,11 @@ class CourseDetailsActivity : AppCompatActivity() {
         binding = ActivityCourseDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Retrieve the Intent that started this Activity
         courseId = intent.getStringExtra("id")
         @SuppressLint("SetTextI18n")
         if (courseId != null) {
             fetchCourseDetails(courseId!!)
         } else {
-            // Handle the case where no ID is found
             binding.tvCoursename.text = "No Course ID provided"
             binding.tvdescription.text = ""
             binding.tvstatus.text = ""
@@ -43,6 +43,7 @@ class CourseDetailsActivity : AppCompatActivity() {
             binding.contact.text = ""
             binding.flagImage.setImageResource(R.drawable.s1)
         }
+        initDrawerManager()
 
         binding.deletecourse.setOnClickListener {
             courseId?.let {
@@ -59,7 +60,6 @@ class CourseDetailsActivity : AppCompatActivity() {
     }
 
     private fun fetchCourseDetails(id: String) {
-        // Use the ApiService from the Instance class
         Instance.apiService.getCourseDetails(id).enqueue(object : Callback<CourseDetailsResponse> {
             override fun onResponse(
                 call: Call<CourseDetailsResponse>,
@@ -116,7 +116,6 @@ class CourseDetailsActivity : AppCompatActivity() {
     }
 
     private fun loadImageFromUrl(imageUrl: String) {
-        // Perform the image loading in a background thread
         Thread {
             try {
                 val url = URL(imageUrl)
@@ -134,5 +133,16 @@ class CourseDetailsActivity : AppCompatActivity() {
                 }
             }
         }.start()
+    }
+
+    private fun initDrawerManager() {
+
+        drawerManager = DrawerManager(
+            this,
+            binding.drawerLayout,
+            binding.toolbarhome,
+            binding.navView
+        )
+        drawerManager.setupNavigationDrawer()
     }
 }

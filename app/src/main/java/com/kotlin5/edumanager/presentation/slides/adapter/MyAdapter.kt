@@ -1,4 +1,4 @@
-package com.kotlin5.edumanager.presentation.sliders
+package com.kotlin5.edumanager.presentation.slides.adapter
 
 import android.content.Context
 import android.view.LayoutInflater

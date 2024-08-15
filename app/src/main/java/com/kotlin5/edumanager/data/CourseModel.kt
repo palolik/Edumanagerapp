@@ -35,5 +35,15 @@ data class CourseDetailsResponse(
     val totalenrolment: String,
     val status: String
 )
+data class Partner(
+    val logo: String,
+    val caption: String
+)
+
+data class Feedback(
+    val rating: String,
+    val feedback: String,
+    val userEmail: String
+)
 
 

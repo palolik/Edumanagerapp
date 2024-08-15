@@ -30,7 +30,7 @@
             android:name=".presentation.courses.adapter.AddCourseActivity"
             android:exported="true" />
         <activity
-            android:name=".presentation.slides.SliderActivity"
+            android:name=".presentation.slides.model.SliderActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

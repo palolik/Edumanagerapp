@@ -5,8 +5,8 @@ import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.kotlin5.edumanager.data.Course
-import com.kotlin5.edumanager.presentation.courses.model.ApiService
-import com.kotlin5.edumanager.presentation.courses.model.Instance
+import com.kotlin5.edumanager.model.ApiService
+import com.kotlin5.edumanager.model.Instance
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback

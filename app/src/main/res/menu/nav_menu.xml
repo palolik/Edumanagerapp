@@ -6,9 +6,9 @@
         android:icon="@drawable/ic_profile"
         android:title="Home"/>
 
-    <item android:id="@+id/second"
+    <item android:id="@+id/addcoursebutton"
         android:icon="@drawable/ic_profile"
-        android:title="2nd"/>
+        android:title="add course"/>
 
     <item android:id="@+id/third"
         android:icon="@drawable/ic_profile"

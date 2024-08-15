@@ -1,4 +1,4 @@
-package com.kotlin5.edumanager.presentation.slides
+package com.kotlin5.edumanager.presentation.slides.model
 
 import android.content.Context
 import android.content.Intent
@@ -17,8 +17,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.kotlin5.edumanager.R
 import com.kotlin5.edumanager.presentation.auth.SignUpActivity
-import com.kotlin5.edumanager.presentation.courses.CourseActivity
-import com.kotlin5.edumanager.presentation.sliders.MyAdapter
+import com.kotlin5.edumanager.presentation.slides.adapter.MyAdapter
 
 class SliderActivity : AppCompatActivity() {
     private lateinit var viewPager: ViewPager

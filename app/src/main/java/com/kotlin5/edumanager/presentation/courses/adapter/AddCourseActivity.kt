@@ -33,7 +33,6 @@ class AddCourseActivity : AppCompatActivity() {
         binding = ActivityAddCourseBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Initialize UI elements
         titleField = findViewById(R.id.titleField)
         courseDesField = findViewById(R.id.CourseDesField)
         imagelinkField = findViewById(R.id.imagelinkField)
@@ -43,7 +42,6 @@ class AddCourseActivity : AppCompatActivity() {
         totalenrollmentField = findViewById(R.id.totalenrollmentField)
         statusField = findViewById(R.id.statusField)
 
-        // Initialize DrawerManager
         initDrawerManager()
 
         val saveButton: Button = findViewById(R.id.addcourse)

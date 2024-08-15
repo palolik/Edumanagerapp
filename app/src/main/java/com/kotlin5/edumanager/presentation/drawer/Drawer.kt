@@ -11,6 +11,7 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.kotlin5.edumanager.R
 import com.kotlin5.edumanager.presentation.auth.SignInActivity
+import com.kotlin5.edumanager.presentation.courses.adapter.AddCourseActivity
 
 class DrawerManager(
     private val context: Context,
@@ -39,8 +40,9 @@ class DrawerManager(
                     val intent = Intent(context, CourseActivity::class.java)
                     context.startActivity(intent)
                 }
-                R.id.second -> {
-                    Toast.makeText(context, "Second Item Clicked", Toast.LENGTH_SHORT).show()
+                R.id.addcoursebutton -> {
+                    val intent = Intent(context, AddCourseActivity::class.java)
+                    context.startActivity(intent)
                 }
                 R.id.third -> {
                     Toast.makeText(context, "Third Item Clicked", Toast.LENGTH_SHORT).show()
