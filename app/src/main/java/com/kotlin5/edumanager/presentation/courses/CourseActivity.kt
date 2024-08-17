@@ -1,5 +1,6 @@
 package com.kotlin5.edumanager.presentation.courses
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.view.MenuItem
@@ -10,6 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.kotlin5.edumanager.R
 import com.kotlin5.edumanager.databinding.ActivityCourseBinding
 import com.kotlin5.edumanager.presentation.courses.adapter.CourseList
 import com.kotlin5.edumanager.presentation.courses.adapter.FeedbackList
@@ -19,6 +22,7 @@ import com.kotlin5.edumanager.presentation.courses.viewmodel.MainActivityViewMod
 import com.kotlin5.edumanager.presentation.courses.viewmodel.PartnerViewModel
 
 class CourseActivity : AppCompatActivity() {
+
     private lateinit var recyclerAdapter: CourseList
     private lateinit var feedbackrAdapter: FeedbackList
     private lateinit var partnerrAdapter: PartnerList
@@ -45,6 +49,7 @@ class CourseActivity : AppCompatActivity() {
         initFeedbackViewModel()
         initPartnerViewModel()
         initDrawerManager()
+        setupBottomNavigationView()
 
         swipeRefreshLayout = binding.swipeRefreshLayout
         swipeRefreshLayout.setOnRefreshListener {
@@ -110,7 +115,7 @@ class CourseActivity : AppCompatActivity() {
                 partnerrAdapter.setPartnerList(partnerList)
                 partnerrAdapter.notifyDataSetChanged()
             } else {
-                Toast.makeText(this, "Error in getting feedback list", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Error in getting partner list", Toast.LENGTH_SHORT).show()
             }
         })
         viewModelPartner.makeAPICall()
@@ -121,6 +126,11 @@ class CourseActivity : AppCompatActivity() {
         drawerManager.setupNavigationDrawer()
     }
 
+    private fun setupBottomNavigationView() {
+        val bottomNavController = BottomNavController(this)
+        val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_nav_view)
+        bottomNavController.setupBottomNavigationView(bottomNavigationView)
+    }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return drawerManager.onOptionsItemSelected(item) || super.onOptionsItemSelected(item)
     }
