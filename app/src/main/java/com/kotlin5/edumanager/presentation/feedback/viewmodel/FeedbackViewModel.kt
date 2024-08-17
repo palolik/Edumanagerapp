@@ -18,12 +18,9 @@ class FeedbackViewModel: ViewModel() {
     init {
         liveDataList = MutableLiveData()
     }
-
-
     fun getLiveDataObserver(): MutableLiveData<List<Feedback>?> {
         return liveDataList
     }
-
     fun makeAPICall() {
         val retroInstance = Instance.getInstance()
         val retroService  = retroInstance.create(ApiService::class.java)
@@ -32,7 +29,6 @@ class FeedbackViewModel: ViewModel() {
             override fun onFailure(call: Call<List<Feedback>>, t: Throwable) {
                 liveDataList.postValue(null)
             }
-
             override fun onResponse(
                 call: Call<List<Feedback>>,
                 response: Response<List<Feedback>>

@@ -1,9 +1,8 @@
 package com.kotlin5.edumanager.presentation.courses
 
-import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.view.MenuItem
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -23,7 +22,6 @@ class CourseActivity : AppCompatActivity() {
     private lateinit var recyclerAdapter: CourseList
     private lateinit var feedbackrAdapter: FeedbackList
     private lateinit var partnerrAdapter: PartnerList
-
     private lateinit var binding: ActivityCourseBinding
     private lateinit var drawerManager: DrawerManager
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
@@ -31,7 +29,8 @@ class CourseActivity : AppCompatActivity() {
     private lateinit var viewModelFeedback: FeedbackViewModel
     private lateinit var viewModelPartner: PartnerViewModel
 
-
+    private val autoScrollHandler = Handler()
+    private lateinit var autoScrollRunnable: Runnable
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +49,11 @@ class CourseActivity : AppCompatActivity() {
         swipeRefreshLayout = binding.swipeRefreshLayout
         swipeRefreshLayout.setOnRefreshListener {
             viewModel.makeAPICall()
+            viewModelFeedback.makeAPICall()
+            viewModelPartner.makeAPICall()
         }
+
+        startAutoScrollingFeedback()
     }
 
     private fun initCourseRecyclerView() {
@@ -64,12 +67,12 @@ class CourseActivity : AppCompatActivity() {
         feedbackrAdapter = FeedbackList(this)
         binding.FeedbackList.adapter = feedbackrAdapter
     }
+
     private fun initPartnerRecyclerView() {
         binding.PartnerList.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
         partnerrAdapter = PartnerList(this)
         binding.PartnerList.adapter = partnerrAdapter
     }
-
 
     private fun initCourseViewModel() {
         viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
@@ -84,6 +87,7 @@ class CourseActivity : AppCompatActivity() {
         })
         viewModel.makeAPICall()
     }
+
     private fun initFeedbackViewModel() {
         viewModelFeedback = ViewModelProvider(this).get(FeedbackViewModel::class.java)
         viewModelFeedback.getLiveDataObserver().observe(this, Observer { feedbackList ->
@@ -97,6 +101,7 @@ class CourseActivity : AppCompatActivity() {
         })
         viewModelFeedback.makeAPICall()
     }
+
     private fun initPartnerViewModel() {
         viewModelPartner = ViewModelProvider(this).get(PartnerViewModel::class.java)
         viewModelPartner.getLiveDataObserver().observe(this, Observer { partnerList ->
@@ -119,10 +124,26 @@ class CourseActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return drawerManager.onOptionsItemSelected(item) || super.onOptionsItemSelected(item)
     }
-//    fun onFabClick(view: View) {
-//        val intent = Intent(this, AddCourseActivity::class.java)
-//        startActivity(intent)
-//    }
 
+    private fun startAutoScrollingFeedback() {
+        autoScrollRunnable = object : Runnable {
+            override fun run() {
+                val layoutManager = binding.FeedbackList.layoutManager as LinearLayoutManager
+                val firstVisibleItem = layoutManager.findFirstVisibleItemPosition()
+                val visibleItemCount = layoutManager.childCount
+                val totalItemCount = layoutManager.itemCount
+                if (totalItemCount > 0) {
+                    val nextItem = (firstVisibleItem + visibleItemCount) % totalItemCount
+                    binding.FeedbackList.smoothScrollToPosition(nextItem)
+                }
+                autoScrollHandler.postDelayed(this, 3000)
+            }
+        }
+        autoScrollHandler.post(autoScrollRunnable)
+    }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        autoScrollHandler.removeCallbacks(autoScrollRunnable)
+    }
 }

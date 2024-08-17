@@ -10,20 +10,47 @@
         android:layout_marginTop="8dp"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-        <TextView
-            android:id="@+id/textViewRating"
+
+    <LinearLayout
+        android:id="@+id/starRatingLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:orientation="horizontal">
+
+        <!-- Star ImageViews -->
+        <ImageView
+            android:id="@+id/star1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Rating"
-            android:textSize="16sp"
-            android:textColor="@android:color/black"
-           />
+            android:src="@drawable/ic_star_empty"/>
+        <ImageView
+            android:id="@+id/star2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_star_empty"/>
+        <ImageView
+            android:id="@+id/star3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_star_empty"/>
+        <ImageView
+            android:id="@+id/star4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_star_empty"/>
+        <ImageView
+            android:id="@+id/star5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_star_empty"/>
+    </LinearLayout>
 
         <TextView
             android:id="@+id/textViewFeedback"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textViewRating"
+
             android:layout_marginTop="4dp"
             android:text="Feedback"
             android:textSize="14sp"

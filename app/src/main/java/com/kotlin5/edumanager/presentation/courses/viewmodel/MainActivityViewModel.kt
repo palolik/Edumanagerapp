@@ -17,8 +17,6 @@ class MainActivityViewModel: ViewModel() {
     init {
         liveDataList = MutableLiveData()
     }
-
-
     fun getLiveDataObserver(): MutableLiveData<List<CourseModel>?> {
         return liveDataList
     }

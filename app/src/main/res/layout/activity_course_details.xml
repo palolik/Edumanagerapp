@@ -7,7 +7,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -140,7 +142,7 @@
 
             </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
-
+    </androidx.core.widget.NestedScrollView>
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navView"
         android:layout_width="wrap_content"
