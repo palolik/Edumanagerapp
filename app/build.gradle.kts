@@ -68,6 +68,9 @@ dependencies {
     implementation(libs.hilt)
     implementation(libs.circleimageview)
     implementation(libs.swiperefreshlayout)
+    implementation(libs.firebase.firestore)
+//    implementation(libs.firebase.common)
+
 
 
 }

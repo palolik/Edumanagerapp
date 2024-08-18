@@ -32,15 +32,12 @@ class CourseActivity : AppCompatActivity() {
     private lateinit var viewModel: MainActivityViewModel
     private lateinit var viewModelFeedback: FeedbackViewModel
     private lateinit var viewModelPartner: PartnerViewModel
-
     private val autoScrollHandler = Handler()
     private lateinit var autoScrollRunnable: Runnable
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCourseBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         setSupportActionBar(binding.toolbarhome)
         initCourseRecyclerView()
         initFeedbackRecyclerView()
@@ -50,35 +47,29 @@ class CourseActivity : AppCompatActivity() {
         initPartnerViewModel()
         initDrawerManager()
         setupBottomNavigationView()
-
         swipeRefreshLayout = binding.swipeRefreshLayout
         swipeRefreshLayout.setOnRefreshListener {
             viewModel.makeAPICall()
             viewModelFeedback.makeAPICall()
             viewModelPartner.makeAPICall()
         }
-
         startAutoScrollingFeedback()
     }
-
     private fun initCourseRecyclerView() {
         binding.CourseListRecyclerview.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
         recyclerAdapter = CourseList(this)
         binding.CourseListRecyclerview.adapter = recyclerAdapter
     }
-
     private fun initFeedbackRecyclerView() {
         binding.FeedbackList.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
         feedbackrAdapter = FeedbackList(this)
         binding.FeedbackList.adapter = feedbackrAdapter
     }
-
     private fun initPartnerRecyclerView() {
         binding.PartnerList.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
         partnerrAdapter = PartnerList(this)
         binding.PartnerList.adapter = partnerrAdapter
     }
-
     private fun initCourseViewModel() {
         viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
         viewModel.getLiveDataObserver().observe(this, Observer { courseList ->
