@@ -77,8 +77,8 @@ class SignInActivity : AppCompatActivity() {
     private fun navigateToRoleBasedActivity(role: String?) {
         val intent = when (role) {
             "admin" -> Intent(this, AdminActivity::class.java)
-            "student" -> Intent(this, CourseActivity::class.java)
-            else -> Intent(this, TeacherActivity::class.java)
+            "teacher" -> Intent(this, TeacherActivity::class.java)
+            else -> Intent(this, CourseActivity::class.java)
         }
         startActivity(intent)
         finish() // Optional: Finish SignInActivity to prevent going back
